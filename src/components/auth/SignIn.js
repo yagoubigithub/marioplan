@@ -4,7 +4,8 @@ import { signIn } from "../../store/actions/authActions";
 class SignIn extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    progress : null
   };
 
   handleChange = e => {
@@ -15,9 +16,24 @@ class SignIn extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.signIn(this.state);
+
+    const progress =  ( <div class="preloader-wrapper big active">
+    <div class="spinner-layer spinner-blue-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>);
+  this.setState({progress})
   };
   render() {
     const {authError}  = this.props;
+  
+    
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit} className="white">
@@ -35,14 +51,15 @@ class SignIn extends Component {
 
           <div className="input-field">
             <button className="btn pink lighten-1 z-depth-0">Login</button>
-            <div className="red-text center">{authError ? <p>{authError}</p> : null}</div>
+            <div className="red-text center">{authError ? authError : this.state.progress}</div>
           </div>
         </form>
       </div>
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state,ownProps) => {
+  
   return {
     authError: state.auth.authError
   };

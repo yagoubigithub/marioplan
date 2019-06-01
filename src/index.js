@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 
 import {createStore,applyMiddleware,compose}  from 'redux';
 import {Provider} from 'react-redux';
-import logger from 'redux-logger';
+
 import thunk from 'redux-thunk';
 import {reactReduxFirebase,getFirebase} from 'react-redux-firebase';
 import {reduxFirestore,getFirestore} from 'redux-firestore';
@@ -18,7 +18,7 @@ import rootReducer from './store/reducers/rootReducer';
 
 const store  = createStore(rootReducer,
     compose(
-    applyMiddleware(thunk.withExtraArgument({getFirebase,getFirestore}),logger),
+    applyMiddleware(thunk.withExtraArgument({getFirebase,getFirestore})),
     reduxFirestore(fbConfig),
     reactReduxFirebase(fbConfig)
 )

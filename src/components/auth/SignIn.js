@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signIn } from "../../store/actions/authActions";
 import {Redirect} from 'react-router-dom';
+import Progress from "../layout/Progress";
 class SignIn extends Component {
   state = {
     email: "",
@@ -18,22 +19,12 @@ class SignIn extends Component {
     e.preventDefault();
     this.props.signIn(this.state);
 
-    const progress =  ( <div className="preloader-wrapper big active">
-    <div className="spinner-layer spinner-blue-only">
-      <div className="circle-clipper left">
-        <div className="circle"></div>
-      </div><div className="gap-patch">
-        <div className="circle"></div>
-      </div><div className="circle-clipper right">
-        <div className="circle"></div>
-      </div>
-    </div>
-  </div>);
+    const progress =  ( <Progress />);
   this.setState({progress})
   };
   render() {
-    const {authError}  = this.props;
-    const {auth}  = this.props;
+    const {authError,auth}  = this.props;
+    
     if(auth.uid) return <Redirect to='/' />
     
     return (

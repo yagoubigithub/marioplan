@@ -1,4 +1,5 @@
 
+
 const initStat = {
     projects: [
         {id: '1', title: 'help me find peach', content: 'blah blah blah'},
@@ -10,10 +11,17 @@ const projectReducer = (state = initStat, action) =>{
 
     switch(action.type){
         case 'CREATE_PROJECT' : {
-            console.log("create project", action.project)
+            console.log("create project", action.project);
+            return state;
         }
+        case 'CREATE_PROJECT_ERROR' : {
+            console.log('CREATE_PROJECT_ERROR',action.err);
+            return state;
+        }
+        default :
+        return state;
     }
-    return state;
+  
 }
 
 export default projectReducer;

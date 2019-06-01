@@ -18,7 +18,7 @@ import rootReducer from './store/reducers/rootReducer';
 
 const store  = createStore(rootReducer,
     compose(
-    applyMiddleware(thunk.withExtraArgument(getFirebase,getFirestore),logger),
+    applyMiddleware(thunk.withExtraArgument({getFirebase,getFirestore}),logger),
     reduxFirestore(fbConfig),
     reactReduxFirebase(fbConfig)
 )

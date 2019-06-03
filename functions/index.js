@@ -35,3 +35,19 @@ const createNotification = (notification) =>{
     return createNotification(notification);
  } );
   
+
+ exports.userJoined = functions.auth.user().onCreate(user=>{
+
+    return admin.firestore().collection('users').doc(user.uid).get().then(doc=>
+    {
+
+        const newUser = doc.data();
+        const notification = {
+            content : "New User Joined",
+            user :   `${newUser.firstname} ${newUser.lastname}`,
+            time :  admin.firestore.FieldValue.serverTimestamp()
+        }
+        return createNotification(notification);
+
+    });
+ });

@@ -5,7 +5,7 @@
   "dependencies": {
     "firebase": "^6.1.0",
     "moment": "^2.24.0",
-    "querystringify": "^2.1.1",
+    "querystringify": "^2.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^5.1.1",
